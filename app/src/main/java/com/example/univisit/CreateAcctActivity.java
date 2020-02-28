@@ -2,6 +2,7 @@ package com.example.univisit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,9 +44,25 @@ public class CreateAcctActivity extends AppCompatActivity implements View.OnClic
 
         switch (id) {
             case R.id.btn_user_create:
+                toHome();
                 break;
             case R.id.tv_user_sign:
+                toSignin();
                 break;
         }
     }
+
+    public void toSignin() {
+        Intent intent = new Intent(CreateAcctActivity.this, SigninActivity.class);
+        startActivity(intent);
+    }
+
+    public void toHome() {
+        Intent intent = new Intent(CreateAcctActivity.this, UserNavigationActivity.class);
+        startActivity(intent);
+    }
+
+//    public boolean checkFields() {
+//        String
+//    }
 }

@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class SigninActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText etUsername, etPassw;
@@ -38,6 +36,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (id) {
             case R.id.btn_user_sign:
+                toHome();
                 break;
             case R.id.tv_user_create:
                 toCreate();
@@ -45,10 +44,10 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-//    private void toHome() {
-//        Intent intent = new Intent(SigninActivity.this, CreateAcctActivity.class);
-//        startActivity(intent);
-//    }
+    private void toHome() {
+        Intent intent = new Intent(SigninActivity.this, UserNavigationActivity.class);
+        startActivity(intent);
+    }
 
     private void toCreate() {
         Intent intent = new Intent(SigninActivity.this, CreateAcctActivity.class);

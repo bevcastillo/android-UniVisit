@@ -9,11 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateAcctActivity"
-            android:theme="@style/BlueThemeNoActionBar"></activity>
-        <activity android:name=".SigninActivity"
-            android:theme="@style/WhiteThemeNoActionBar"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".AddVisitActivity"
+            android:parentActivityName=".UserNavigationActivity"
+            android:theme="@style/WhiteTheme"></activity>
+        <activity
+            android:name=".MyAccountActivity"
+            android:parentActivityName=".UserNavigationActivity"
+            android:theme="@style/WhiteTheme" />
+        <activity
+            android:name=".UserNavigationActivity"
+            android:theme="@style/WhiteThemeNoActionBar" />
+        <activity
+            android:name=".CreateAcctActivity"
+            android:theme="@style/BlueThemeNoActionBar" />
+        <activity
+            android:name=".SigninActivity"
+            android:theme="@style/WhiteThemeNoActionBar" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/WhiteThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
