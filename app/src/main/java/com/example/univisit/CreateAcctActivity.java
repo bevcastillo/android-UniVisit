@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
@@ -44,7 +45,9 @@ public class CreateAcctActivity extends AppCompatActivity implements View.OnClic
 
         switch (id) {
             case R.id.btn_user_create:
-                toHome();
+                if (isNotEmptyFields()) {
+                    toHome();
+                }
                 break;
             case R.id.tv_user_sign:
                 toSignin();
@@ -62,7 +65,51 @@ public class CreateAcctActivity extends AppCompatActivity implements View.OnClic
         startActivity(intent);
     }
 
-//    public boolean checkFields() {
-//        String
-//    }
+    public boolean isNotEmptyFields() {
+        String lastname = etLname.getText().toString().trim();
+        String firstname = etFname.getText().toString().trim();
+        String address = etAddr.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
+        String username = etUsername.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassw.getText().toString().trim();
+
+        if (lastname.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (firstname.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (address.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (phone.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+
+    }
 }

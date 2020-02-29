@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SigninActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,7 +37,9 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
 
         switch (id) {
             case R.id.btn_user_sign:
-                toHome();
+                if (isNotEmptyFields()) {
+                    toHome();
+                }
                 break;
             case R.id.tv_user_create:
                 toCreate();
@@ -52,5 +55,23 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
     private void toCreate() {
         Intent intent = new Intent(SigninActivity.this, CreateAcctActivity.class);
         startActivity(intent);
+    }
+
+    private boolean isNotEmptyFields() {
+        String username = etUsername.getText().toString().trim();
+        String password = etPassw.getText().toString().trim();
+
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+
     }
 }
