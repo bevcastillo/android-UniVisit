@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,7 +29,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class AddVisitActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+public class AddVisitActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
     String strSchoolName;
     private RadioGroup rdgVisitorType;
@@ -38,7 +39,7 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
     private Spinner spinnerPurpose;
     private Button btnBrowse;
 
-    String selectedVisitorType;
+    String selectedVisitorType, selectedPurpose;
     private int vYear, vMonth, vDay, vHour, vMinute;
     private String strVisitDate, strVisitTime, am_pm;
     private final Calendar c = Calendar.getInstance();
@@ -68,6 +69,7 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
         rdgVisitorType.setOnCheckedChangeListener(this);
         etVisitDate.setOnClickListener(this);
         etVisitTime.setOnClickListener(this);
+        spinnerPurpose.setOnItemSelectedListener(this);
 
     }
 
@@ -228,5 +230,21 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }, vHour, vMinute, true);
         dialog.show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int sid = parent.getId();
+
+        switch (sid) {
+            case R.id.spinner_purpose:
+                selectedPurpose = this.spinnerPurpose.getItemAtPosition(position).toString();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
