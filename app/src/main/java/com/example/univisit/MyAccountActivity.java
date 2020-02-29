@@ -1,11 +1,16 @@
 package com.example.univisit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -45,5 +50,77 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
             case R.id.btn_browse_image:
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_save, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_save:
+                if (isNotEmptyFields()) {
+                    saveToDatabase();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void saveToDatabase() {
+    }
+
+    public boolean isNotEmptyFields() {
+        String lastname = etLastname.getText().toString().trim();
+        String firstname = etFirstname.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
+        String username = etUsername.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+
+        if (lastname.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (firstname.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (phone.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (address.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Fields can not be empty!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }

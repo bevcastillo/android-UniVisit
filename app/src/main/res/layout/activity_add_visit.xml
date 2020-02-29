@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Parent"
-                android:checked="true"
                 android:buttonTint="@color/colorBlue"/>
 
             <RadioButton
@@ -124,6 +123,7 @@
         android:drawableRight="@drawable/ic_calendar"
         android:drawableTint="#808080"
         style="@style/TextAppearance.AppCompat.Small"
+        android:focusable="false"
         android:layout_marginTop="6dp"/>
 
     <TextView
@@ -148,7 +148,8 @@
         android:drawableRight="@drawable/ic_time"
         android:drawableTint="#808080"
         style="@style/TextAppearance.AppCompat.Small"
-        android:layout_marginTop="6dp"/>
+        android:layout_marginTop="6dp"
+        android:focusable="false"/>
 
         <TextView
             android:layout_width="wrap_content"
