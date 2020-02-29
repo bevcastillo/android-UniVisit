@@ -1,6 +1,7 @@
 package com.example.univisit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -9,6 +10,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -38,13 +42,15 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
     private EditText etVisitDate, etVisitTime, etIDNumber;
     private Spinner spinnerPurpose;
     private Button btnBrowse;
+    private ImageView ivValidId;
 
     String selectedVisitorType, selectedPurpose;
     private int vYear, vMonth, vDay, vHour, vMinute;
     private String strVisitDate, strVisitTime, am_pm;
     private final Calendar c = Calendar.getInstance();
+    Uri uriValidId;
 
-
+    private static final int PICK_IMAGE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,7 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
         etIDNumber = findViewById(R.id.et_val_id_num);
         spinnerPurpose = findViewById(R.id.spinner_purpose);
         btnBrowse = findViewById(R.id.btn_browse);
+        ivValidId = findViewById(R.id.iv_valid_id);
 
         btnBrowse.setOnClickListener(this);
 
@@ -167,7 +174,23 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void openGalleryIntent() {
+        Intent intent = new Intent(); //blind intent
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+    }
 
+    //handles opening the gallery
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            uriValidId = data.getData();
+            ivValidId.setImageURI(uriValidId);
+        }
     }
 
     @Override
@@ -190,7 +213,7 @@ public class AddVisitActivity extends AppCompatActivity implements View.OnClickL
 
     public void getVisitDate() {
             vYear = c.get(Calendar.YEAR);
-            vMinute = c.get(Calendar.MONTH);
+            vMonth = c.get(Calendar.MONTH);
             vDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,

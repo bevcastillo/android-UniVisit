@@ -1,8 +1,11 @@
 package com.example.univisit;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +22,10 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     private EditText etLastname, etFirstname, etPhone, etAddress, etUsername, etEmail, etPassword;
     private CircularImageView civImage;
     private Button btnBrowse;
+
+    Uri profileUri;
+
+    private static final int PICK_IMAGE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,25 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
 
         switch (id) {
             case R.id.btn_browse_image:
+                openGalleryIntent();
                 break;
+        }
+    }
+
+    private void openGalleryIntent() {
+        Intent intent = new Intent(); //blind intent
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
+            profileUri = data.getData();
+            civImage.setImageURI(profileUri);
         }
     }
 
@@ -75,6 +100,7 @@ public class MyAccountActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void saveToDatabase() {
+
     }
 
     public boolean isNotEmptyFields() {

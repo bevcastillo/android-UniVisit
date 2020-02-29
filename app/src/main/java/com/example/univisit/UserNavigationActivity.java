@@ -67,7 +67,7 @@ public class UserNavigationActivity extends AppCompatActivity implements BottomN
         builder.setPositiveButton("LOG OUT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                toMainPage();
             }
         });
         builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -84,6 +84,11 @@ public class UserNavigationActivity extends AppCompatActivity implements BottomN
 
     public void toMyAccount() {
         Intent intent = new Intent(UserNavigationActivity.this, MyAccountActivity.class);
+        startActivity(intent);
+    }
+
+    public void toMainPage() {
+        Intent intent = new Intent(UserNavigationActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
